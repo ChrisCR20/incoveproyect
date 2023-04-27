@@ -230,7 +230,7 @@ console.log(tamaño);
            // labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
             labels: tamaño,
             datasets: [{
-                label: 'Ventas por mes',
+                label: 'Comportamiento de ventas',
                 data:data.map(function(data1){return data1.venta}),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
