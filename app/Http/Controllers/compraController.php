@@ -25,15 +25,15 @@ class compraController extends Controller
     {
         //
         
-        $producto=DB::table('Producto')->select('id_producto','nombreproducto')
+        $producto=DB::table('producto')->select('id_producto','nombreproducto')
         ->orderby('id_producto','desc')
         ->get();
 
-        $tipopago=DB::table('Tipo_pago')->select('id_tipopago','nombretipo')
+        $tipopago=DB::table('tipo_pago')->select('id_tipopago','nombretipo')
         ->orderby('id_tipopago','desc')
         ->get();
 
-        $proveedor=DB::table('Proveedor')->select('id_proveedor','nombreproveedor')
+        $proveedor=DB::table('proveedor')->select('id_proveedor','nombreproveedor')
         ->orderby('id_proveedor','desc')
         ->get();
 
@@ -42,7 +42,7 @@ class compraController extends Controller
 
 
             $data = DB::table('encabezado_facturaC as ef')
-            ->join('Proveedor as pr','ef.id_proveedor','=','pr.id_proveedor')
+            ->join('proveedor as pr','ef.id_proveedor','=','pr.id_proveedor')
             ->select('ef.id_encabezadofacturac',DB::raw("CONCAT(ef.serie,'-',ef.numerodoctoc) as Factura"),'ef.fecha','pr.nombreproveedor','ef.totalcompra')
             ->orderBy('ef.id_encabezadofacturac','desc')
             ->get();
@@ -141,11 +141,11 @@ class compraController extends Controller
     {
         //
         
-        $tipopago=DB::table('Tipo_pago')->select('id_tipopago','nombretipo')
+        $tipopago=DB::table('tipo_pago')->select('id_tipopago','nombretipo')
         ->orderby('id_tipopago','desc')
         ->get();
 
-        $proveedor=DB::table('Proveedor')->select('id_proveedor','nombreproveedor')
+        $proveedor=DB::table('proveedor')->select('id_proveedor','nombreproveedor')
         ->orderby('id_proveedor','desc')
         ->get();
 
@@ -163,7 +163,7 @@ class compraController extends Controller
 
             $data1 = DB::table('encabezado_facturaC as ef')
             ->join('detalle_facturac as df','ef.id_encabezadofacturac','=','df.id_encabezadofacturac')
-            ->join('Producto as pr','df.id_producto','=','pr.id_producto')
+            ->join('producto as pr','df.id_producto','=','pr.id_producto')
             ->select('df.id_detallefacturac','df.cantidad','pr.nombreproducto','df.subtotal')
             ->where('ef.id_encabezadofacturaC','=',$id)
             ->get();
@@ -201,7 +201,7 @@ class compraController extends Controller
     public function mostraritem($id)
     {
         $item = DB::table('detalle_facturac as df')
-        ->join('Producto as pr','df.id_producto','=','pr.id_producto')
+        ->join('producto as pr','df.id_producto','=','pr.id_producto')
         ->select('pr.nombreproducto','df.cantidad','df.subtotal','df.id_producto','df.id_detallefacturac','df.id_encabezadofacturaC')
         ->where('id_detallefacturac','=',$id)
         ->get();
