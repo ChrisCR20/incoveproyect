@@ -9,7 +9,7 @@ class Persona extends Model
 {
     use HasFactory;
 
-    protected $table='Persona';
+    protected $table='persona';
     protected $primaryKey='id_persona';
     public $timestamps=false;
     
