@@ -217,6 +217,31 @@ $(document).ready(function(){
   if (data2.mes == 4){
     return "Abril";
   }
+  if (data2.mes == 5){
+    return "Mayo";
+  }
+  if (data2.mes == 12){
+    return "Junio";
+  }
+  if (data2.mes == 4){
+    return "Julio";
+  }
+  if (data2.mes == 4){
+    return "Agosto";
+  }
+  if (data2.mes == 4){
+    return "Septiembre";
+  }
+  if (data2.mes == 4){
+    return "Octubre";
+  }
+  if (data2.mes == 4){
+    return "Noviembre";
+  }
+  if (data2.mes == 4){
+    return "Diciembre";
+  }
+   
    
   })
 
