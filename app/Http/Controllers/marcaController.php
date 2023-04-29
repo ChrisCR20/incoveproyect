@@ -17,7 +17,7 @@ class marcaController extends Controller
     {
         //
               //
-              $data = DB::table('Marca')
+              $data = DB::table('marca')
               ->select('id_marca','nombremarca')
               ->get();
           
@@ -67,13 +67,13 @@ class marcaController extends Controller
 
         if($search=='')
         {
-            $marca = DB::table('Marca')
+            $marca = DB::table('marca')
             ->select('id_marca','nombremarca')
             ->get();
             // dd($categorias);
         }else
         {
-            $marca = DB::table('Marca')
+            $marca = DB::table('marca')
             ->select('id_marca','nombremarca')
             ->where('nombremarca','like','%'.$search.'%')
             ->get();

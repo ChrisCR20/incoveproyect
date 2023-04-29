@@ -18,7 +18,7 @@ class categoriaController extends Controller
 
         if($request->ajax())
         {
-            $data = DB::table('Categoría')
+            $data = DB::table('categoría')
             ->select('id_categoria','nombrecategoria')
             ->get();;
          //   $datos = json_decode($data,true);
@@ -92,13 +92,13 @@ class categoriaController extends Controller
 
         if($search=='')
         {
-            $categorias = DB::table('Categoría')
+            $categorias = DB::table('categoría')
             ->select('id_categoria','nombrecategoria')
             ->get();
             // dd($categorias);
         }else
         {
-            $categorias = DB::table('Categoría')
+            $categorias = DB::table('categoría')
             ->select('id_categoria','nombrecategoria')
             ->where('nombrecategoria','like','%'.$search.'%')
             ->get();

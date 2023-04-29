@@ -17,7 +17,7 @@ class medidaController extends Controller
     {
         //
              //
-             $data = DB::table('Medida')
+             $data = DB::table('medida')
              ->select('id_medida','nombremedida')
              ->get();
          
@@ -66,13 +66,13 @@ class medidaController extends Controller
 
         if($search=='')
         {
-            $medida = DB::table('Medida')
+            $medida = DB::table('medida')
             ->select('id_medida','nombremedida')
             ->get();
             // dd($categorias);
         }else
         {
-            $medida = DB::table('Medida')
+            $medida = DB::table('medida')
             ->select('id_medida','nombremedida')
             ->where('nombremedida','like','%'.$search.'%')
             ->get();
