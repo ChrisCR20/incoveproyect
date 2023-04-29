@@ -26,11 +26,11 @@ class empleadoController extends Controller
     public function index()
     {
   
-        $data = DB::table('Persona')
-        ->join('Empleado','Empleado.codunicoid','=','Persona.codunicoid')
-        ->join('sucursal_empleado','sucursal_empleado.id_persona','=','Empleado.id_empleado')
+        $data = DB::table('persona')
+        ->join('empleado','empleado.codunicoid','=','persona.codunicoid')
+        ->join('sucursal_empleado','sucursal_empleado.id_persona','=','empleado.id_empleado')
         ->join('sucursal','sucursal.id_sucursal','=','sucursal_empleado.id_sucursal')
-        ->select('Persona.id_persona',DB::raw("CONCAT(Persona.primer_nombre,' ',Persona.primer_apellido) as nombre"),'Persona.codunicoid','sucursal.nombresucursal')
+        ->select('persona.id_persona',DB::raw("CONCAT(persona.primer_nombre,' ',persona.primer_apellido) as nombre"),'persona.codunicoid','sucursal.nombresucursal')
         ->get();
     
         if(count($data) ==0){
@@ -75,20 +75,20 @@ class empleadoController extends Controller
         $Persona->segundo_apellido = $request->input('segundo_apellido');
         $Persona->save();
 
-        $Empleado = new Empleado;
-        $Empleado->codunicoid =$request->input('codunicoid');
-        $Empleado->tel_corporativo =$request->input('tel_corporativo');
-        $Empleado->status ='1';
-        $Empleado->save();
+        $empleado = new Empleado;
+        $empleado->codunicoid =$request->input('codunicoid');
+        $empleado->tel_corporativo =$request->input('tel_corporativo');
+        $empleado->status ='1';
+        $empleado->save();
 
-        $EmpleadoSucursal = new SucursalEmpleado;
-        $EmpleadoSucursal->id_persona =$Empleado->id_empleado;
-        $EmpleadoSucursal->id_sucursal =$request->input('id_sucursal');
-        $EmpleadoSucursal->save();
+        $empleadoSucursal = new Sucursalempleado;
+        $empleadoSucursal->id_persona =$empleado->id_empleado;
+        $empleadoSucursal->id_sucursal =$request->input('id_sucursal');
+        $empleadoSucursal->save();
 
 
         return redirect()->route('empleado.index')
-            ->with('success', 'Empleado creado satisfactoriamente.');
+            ->with('success', 'empleado creado satisfactoriamente.');
     }
 
     /**
@@ -167,14 +167,14 @@ class empleadoController extends Controller
        //dd($idemp[0]);
         $input = $request->all();
 
-        $Empleado =Empleado::findOrFail($idemp[0]);
-        $Empleado->tel_corporativo =$request->input('tel_corporativo');
-        $Empleado->status ='1';
-        $Empleado->save();
+        $empleado =empleado::findOrFail($idemp[0]);
+        $empleado->tel_corporativo =$request->input('tel_corporativo');
+        $empleado->status ='1';
+        $empleado->save();
         
-        $EmpleadoSucursal = SucursalEmpleado::findOrFail($idemp[0]);
-        $EmpleadoSucursal->id_sucursal = $request->input('id_sucursal');
-        $EmpleadoSucursal->save();
+        $empleadoSucursal = Sucursalempleado::findOrFail($idemp[0]);
+        $empleadoSucursal->id_sucursal = $request->input('id_sucursal');
+        $empleadoSucursal->save();
             
         $persona = Persona::find($id);
         $persona->update($input);
@@ -183,7 +183,7 @@ class empleadoController extends Controller
 
        
 
-        return redirect()->route('empleado.index')->with('success', 'Empleado actualizado exitosamente.');
+        return redirect()->route('empleado.index')->with('success', 'empleado actualizado exitosamente.');
 
     }
 
