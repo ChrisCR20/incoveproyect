@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function topproductos(Request $request)
     {
         $item = DB::table('detalle_factura as df')
-        ->join('Producto as pr','df.id_producto','=','pr.id_producto')
+        ->join('producto as pr','df.id_producto','=','pr.id_producto')
         ->select('pr.nombreproducto',DB::raw('count(df.cantidad) as cantidad'))
         ->groupBy('pr.nombreproducto')
         ->orderBy('cantidad','desc')
@@ -52,7 +52,7 @@ class HomeController extends Controller
     public function revenuepermonth(Request $request){
         $revenues = DB::table('encabezado_factura as ef')
         ->join('detalle_factura as df','ef.id_encabezadof','=','df.id_encabezadof')
-        ->join('Producto as pr','df.id_producto','=','pr.id_producto')
+        ->join('producto as pr','df.id_producto','=','pr.id_producto')
         ->select(DB::raw('sum(df.subtotal) as venta'),DB::raw('month(ef.fecha) as mes'))
         ->groupBy('mes')
         ->orderBy('mes','asc')
