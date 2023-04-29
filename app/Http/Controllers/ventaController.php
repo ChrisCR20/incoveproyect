@@ -30,11 +30,11 @@ class ventaController extends Controller
     public function create()
     {
         //
-        $tipopago = DB::table('Tipo_pago')
+        $tipopago = DB::table('tipo_pago')
         ->select('id_tipopago','nombretipo')
         ->get();
 
-        $producto=DB::table('Producto')->select('id_producto','nombreproducto')
+        $producto=DB::table('producto')->select('id_producto','nombreproducto')
         ->orderby('id_producto','desc')
         ->get();
         return view('venta.create2',['tipopago'=>$tipopago,'producto'=>$producto]);
@@ -44,7 +44,7 @@ class ventaController extends Controller
     {
         Auth::user()->id;
 
-        $persona = DB::table('Cliente')
+        $persona = DB::table('cliente')
         ->select('nombrecliente', 'id_cliente', 'emailcliente')
         ->where('nitcliente', '=', $nit)
         ->first();
@@ -57,7 +57,7 @@ class ventaController extends Controller
     public function getunitario($id)
     {
 
-        $punitario = DB::table('Producto')
+        $punitario = DB::table('producto')
         ->select('precio_venta', 'id_producto','cantidad')
         ->where('id_producto', '=', $id)
         ->first();
