@@ -10,7 +10,7 @@ class TipoPago extends Model
     use HasFactory;
 
             
-    protected $table='Tipo_pago';
+    protected $table='tipo_pago';
     protected $primaryKey='id_tipopago';
     public $timestamps=false;
     
