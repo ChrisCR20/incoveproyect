@@ -10,7 +10,7 @@ class SucursalEmpleado extends Model
     use HasFactory;
 
     
-    protected $table='Sucursal_Empleado';
+    protected $table='sucursal_empleado';
      protected $primaryKey='id_persona';
     public $timestamps=false;
     
