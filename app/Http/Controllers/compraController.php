@@ -41,7 +41,7 @@ class compraController extends Controller
         {
 
 
-            $data = DB::table('encabezado_facturaC as ef')
+            $data = DB::table('encabezado_facturac as ef')
             ->join('proveedor as pr','ef.id_proveedor','=','pr.id_proveedor')
             ->select('ef.id_encabezadofacturac',DB::raw("CONCAT(ef.serie,'-',ef.numerodoctoc) as Factura"),'ef.fecha','pr.nombreproveedor','ef.totalcompra')
             ->orderBy('ef.id_encabezadofacturac','desc')
