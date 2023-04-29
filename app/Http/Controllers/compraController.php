@@ -149,7 +149,7 @@ class compraController extends Controller
         ->orderby('id_proveedor','desc')
         ->get();
 
-        $data = DB::table('encabezado_facturaC as ef')
+        $data = DB::table('encabezado_facturac as ef')
         ->select('ef.id_encabezadofacturac','ef.serie','ef.numerodoctoc','ef.id_tipopago','ef.id_proveedor','ef.totalcompra')
         ->where('ef.id_encabezadofacturaC','=',$id)
         ->get();
@@ -161,7 +161,7 @@ class compraController extends Controller
         {
             
 
-            $data1 = DB::table('encabezado_facturaC as ef')
+            $data1 = DB::table('encabezado_facturac as ef')
             ->join('detalle_facturac as df','ef.id_encabezadofacturac','=','df.id_encabezadofacturac')
             ->join('producto as pr','df.id_producto','=','pr.id_producto')
             ->select('df.id_detallefacturac','df.cantidad','pr.nombreproducto','df.subtotal')
@@ -219,7 +219,7 @@ class compraController extends Controller
     {
         try {
 
-            $stockanterior = DB::table('detalle_facturaC as dfc')
+            $stockanterior = DB::table('detalle_facturac as dfc')
             ->where('id_detallefacturac','=',$request->iddetallec)
             ->get();
    
