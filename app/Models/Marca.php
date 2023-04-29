@@ -10,7 +10,7 @@ class Marca extends Model
     use HasFactory;
 
             
-    protected $table='Marca';
+    protected $table='marca';
     protected $primaryKey='id_marca';
     public $timestamps=false;
     

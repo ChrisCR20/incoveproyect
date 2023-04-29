@@ -9,7 +9,7 @@ class Medida extends Model
 {
     use HasFactory;
 
-    protected $table='Medida';
+    protected $table='medida';
     protected $primaryKey='id_medida';
     public $timestamps=false;
     
