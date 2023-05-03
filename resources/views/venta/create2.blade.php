@@ -31,7 +31,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input type="text"name="fechafactv" id="fechafactv" class="form-control"  value="{{ date('Y-m-d H:i:s') }}" disabled>
+                            <input type="text"name="fechafactv" id="fechafactv" class="form-control"  value="{{ date('Y-m-d') }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-12">
