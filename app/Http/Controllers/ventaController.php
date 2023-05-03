@@ -74,11 +74,12 @@ class ventaController extends Controller
     {
   
         $miArrayPA = $request->nmtitulo;
-        //dd($miArrayPA);
+        //dd($request->input('fechafactv'));
         $facturaC = new encabezado_factura;
         $facturaC->id_cliente = $request->input('id_cliente');
         $facturaC->id_tipopago = $request->input('id_tipopago');
         $facturaC->id_sucursal = $request->input('id_sucursal');
+        $facturaC->fecha = $request->input('fechafactv');
         $facturaC->id_caja = 3;
         $facturaC->save();
 

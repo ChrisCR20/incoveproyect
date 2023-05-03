@@ -79,7 +79,7 @@ function guardar(e) {
             itemsDataPA.push(valor);
         });
 
-        formData.append('fechafactc', $('#fechafactc').val());
+        formData.append('fechafactv', $('#fechafactv').val());
         formData.append('serie', $('#serie').val());
         formData.append('numerodocto', $('#numerodocto').val());
         formData.append('id_proveedor', $('#id_proveedor').val());
