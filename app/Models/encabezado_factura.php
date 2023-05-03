@@ -18,7 +18,8 @@ class encabezado_factura extends Model
         'id_tipopago',
         'id_sucursal',
         'montototal',
-        'id_caja'
+        'id_caja',
+        'fecha'
 
     ];
 }
