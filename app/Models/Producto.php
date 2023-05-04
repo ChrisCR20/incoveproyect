@@ -10,7 +10,7 @@ class Producto extends Model
     use HasFactory;
 
     
-    protected $table='Producto';
+    protected $table='producto';
     protected $primaryKey='id_producto';
     public $timestamps=false;
     
