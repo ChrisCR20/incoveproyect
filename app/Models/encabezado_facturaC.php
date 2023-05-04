@@ -9,7 +9,7 @@ class encabezado_facturaC extends Model
 {
     use HasFactory;
 
-    protected $table='encabezado_facturaC';
+    protected $table='encabezado_facturac';
     protected $primaryKey='id_encabezadofacturaC';
     public $timestamps=false;
     
