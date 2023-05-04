@@ -30,13 +30,13 @@ use App\Http\Controllers\ventasController;
 */
 
 
-Route::get('/', function () {
-    return view('home2');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('home2');
+// })->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
 Route::group(['middleware' => ['auth']], function() {
@@ -120,7 +120,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/obtenertoppr', 'App\Http\Controllers\HomeController@topproductos');
 Route::get('/home/obtenerventa', 'App\Http\Controllers\HomeController@revenuepermonth');
 

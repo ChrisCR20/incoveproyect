@@ -24,7 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home2');
+        $ventas= DB::table('encabezado_factura')
+        ->select(DB::raw('count(id_encabezadof) as ventas'))
+        ->get();
+
+        $productos= DB::table('producto')
+        ->select(DB::raw('count(id_producto) as productos'))
+        ->get();
+
+        $compras= DB::table('encabezado_facturac')
+        ->select(DB::raw('count(id_encabezadofacturaC) as compras'))
+        ->get();
+
+        $clientes= DB::table('cliente')
+        ->select(DB::raw('count(id_cliente) as clientes'))
+        ->get();
+
+        
+        //dd($ventas);
+        return view('home2',compact('ventas','productos','compras','clientes'));
     }
 
     public function topproductos(Request $request)

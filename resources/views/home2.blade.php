@@ -18,11 +18,19 @@
 
   <div class="col-lg-8">
     <div class="col-lg-12 col-12">
-   <canvas id="myChart" width="400" height="150"></canvas>
+      <div class="small-box">
+        <div class="inner">
+   <canvas id="myChart" width="400" height="150" ></canvas>
+        </div>
+      </div>
     </div>
     <div height="150"><h1></h1></div>
     <div class="col-lg-12 col-12">
+      <div class="small-box">
+        <div class="inner">
       <canvas id="myChart2" width="400" height="150"></canvas>
+        </div>
+      </div>
        </div>
   </div>
   <div class="col-lg-4">
@@ -31,7 +39,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>10</h3>
+          <h3>{{ $ventas[0]->ventas }}</h3>
 
           <p>Ventas</p>
         </div>
@@ -47,14 +55,14 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>25</h3>
+          <h3>{{ $compras[0]->compras }}</h3>
 
-          <p>Pedidos</p>
+          <p>Compras</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="/indexcompras" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -62,29 +70,29 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{ $productos[0]->productos }}</h3>
 
-          <p>Devoluciones</p>
+          <p>Productos</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="/producto" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
     <div class="col-lg-12 col-12">
       <!-- small box -->
-      <div class="small-box bg-danger">
+      <div class="small-box bg-secondary">
         <div class="inner">
-          <h3>65</h3>
+          <h3>{{ $clientes[0]->clientes }}</h3>
 
-          <p>Ventas canceladas</p>
+          <p>Clientes</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="/indexcliente" class="small-box-footer">Más informacion <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
