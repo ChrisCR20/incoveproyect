@@ -130,11 +130,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -330,6 +330,22 @@ return [
                     'url'  => 'sucursal',
                     'icon' => 'fa fa-sitemap',
                     'can' => 'sucursal.rise'
+                ],
+                [
+                    'text' => 'Caja',
+                    'url'  => 'caja',
+                    'icon' => 'fa fa-archive',
+                    'can' => 'sucursal.rise',
+                    'submenu' => [
+                        [
+                            'text' => 'Apertura',
+                            'url' => 'cajaapertura'
+                        ],
+                        [
+                            'text' => 'Cierre',
+                            'url' => 'cajacierre'
+                        ],
+                    ],
                 ],
                 [
                     'text' => 'Empleados',

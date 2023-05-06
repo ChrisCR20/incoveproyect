@@ -18,6 +18,7 @@ use App\Http\Controllers\productoController;
 use App\Http\Controllers\compraController;
 use App\Http\Controllers\ventaController;
 use App\Http\Controllers\ventasController;
+use App\Http\Controllers\cajaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('medida',medidaController::class);
     Route::resource('producto',productoController::class);
     Route::resource('compra',compraController::class);
+    Route::resource('caja',cajaController::class);
      //Route::resource('venta',ventaController::class);
      Route::get('perfil', 'App\Http\Controllers\empleadoController@perfil'); 
     //Categoria
@@ -100,6 +102,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sucursal/obtener/{id}', 'App\Http\Controllers\sucursalController@mostrarsucursal');
     Route::post('sucursal/ingreso', 'App\Http\Controllers\sucursalController@store');
     Route::post('sucursal/edicion', 'App\Http\Controllers\sucursalController@edit');
+
+    Route::get('cajaapertura', 'App\Http\Controllers\cajaController@apertura');
+    Route::get('cajacierre', 'App\Http\Controllers\cajaController@cierre');
 
     Route::get('indexcliente', 'App\Http\Controllers\clientesController@index');
     Route::get('cliente/obtener/{id}', 'App\Http\Controllers\clientesController@mostrarcliente'); 

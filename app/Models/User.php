@@ -42,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function adminlte_image()
+    {
+        return 'images/userprf.png';
+    }
+
+    public function adminlte_desc()
+    {
+        return 'Un mundo sin limites';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'perfil';
+    }
 }
