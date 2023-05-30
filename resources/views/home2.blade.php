@@ -145,7 +145,7 @@
   document.addEventListener("keydown", function(event) {
     if ( event.code === "KeyV")
     {
-        window.location.href='/venta/crear'
+        window.location.href='ventacrear'
         event.preventDefault();
     }
     if ( event.code === "KeyC")

@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function adminlte_image()
     {
-        return 'images/userprf.png';
+        return '../../images/userprf.png';
     }
 
     public function adminlte_desc()

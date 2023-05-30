@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('empresa',empresaController::class);
     Route::resource('sucursal',sucursalController::class);
     Route::resource('empleado',empleadoController::class);
-    Route::resource('ventas',ventasController::class);
+    // Route::resource('ventas',ventasController::class);
     Route::resource('clientes',clientesController::class);
     Route::resource('proveedor',proveedorController::class);
     Route::resource('categoria',categoriaController::class);
@@ -80,16 +80,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('editcompras/{idcompra}', 'App\Http\Controllers\compraController@edit');
     Route::get('editcompras/compra/obteneritem/{id}', 'App\Http\Controllers\compraController@mostraritem'); 
     Route::post('editcompras/edicion', 'App\Http\Controllers\compraController@actu');
-    Route::post('compra/ingreso', 'App\Http\Controllers\compraController@store');// crear categoria con modal en vista producto 
+    Route::post('compra/ingreso', 'App\Http\Controllers\compraController@store');
    
 
 
     //Ventas
     Route::post('venta/ingreso', 'App\Http\Controllers\ventaController@store')->name('venta.ingreso');
-    Route::get('venta/crear', 'App\Http\Controllers\ventaController@create');
+    Route::get('ventacrear', 'App\Http\Controllers\ventaController@create');
     Route::get('venta/obtener/nit/{nit}', 'App\Http\Controllers\ventaController@getnit');
     Route::get('venta/obtener/p_unitario/{id}', 'App\Http\Controllers\ventaController@getunitario'); // obtener precio unitario de producto
     Route::post('venta/crearcliente', 'App\Http\Controllers\clientesController@storecl');
+    Route::get('venta/card/{dato}', 'App\Http\Controllers\ventaController@card1');
+     
    
     // Route::get('ventanew', 'App\Http\Controllers\ventaController@create');
     // Route::post('venta/ingreso', 'App\Http\Controllers\clientesController@storecl');// crear categoria con modal en vista producto
@@ -105,6 +107,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('cajaapertura', 'App\Http\Controllers\cajaController@apertura');
     Route::get('cajacierre', 'App\Http\Controllers\cajaController@cierre');
+    Route::post('caja/ingreso', 'App\Http\Controllers\cajaController@store');
 
     Route::get('indexcliente', 'App\Http\Controllers\clientesController@index');
     Route::get('cliente/obtener/{id}', 'App\Http\Controllers\clientesController@mostrarcliente'); 

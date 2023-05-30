@@ -116,7 +116,7 @@
 								</td>
                                 <td></td>
 								<td align="right">
-									Fecha: {{ date('Y-m-d H:i:s') }}<br />
+									Fecha: {{ date('Y-m-d') }}<br />
 								</td>
 							</tr>
 						</table>

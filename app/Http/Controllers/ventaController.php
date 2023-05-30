@@ -27,6 +27,27 @@ class ventaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function card1($id)
+    {
+        //dd($id);
+        $producto=DB::table('producto')->select('id_producto','nombreproducto')
+        ->where('nombreproducto','LIKE','%'.$id.'%')
+        ->orderby('id_producto','desc')
+        ->get();
+        
+        if(count($producto)<1){
+            $producto=DB::table('producto')->select('id_producto','nombreproducto')
+        ->orderby('id_producto','desc')
+        ->get();
+        return view('venta.cardvacia');
+        }
+        else{
+            return view('venta.card',compact('producto'));
+        }
+
+      //  dd($producto);
+       
+    }
     public function create()
     {
         //
@@ -37,7 +58,7 @@ class ventaController extends Controller
         $producto=DB::table('producto')->select('id_producto','nombreproducto')
         ->orderby('id_producto','desc')
         ->get();
-        return view('venta.create2',['tipopago'=>$tipopago,'producto'=>$producto]);
+        return view('venta.pos',['tipopago'=>$tipopago,'producto'=>$producto]);
     }
 
     public function getnit($nit)
@@ -118,9 +139,7 @@ class ventaController extends Controller
         $pago = DB::table('tipo_pago')
         ->where('tipo_pago.id_tipopago','=',$request->input('id_tipopago'))
         ->get();
-
         $pdf = PDF::loadView('imprimir',compact('cliente','pago','orden','detallef','encabezadof'));
-
         $path = public_path('facturas/');
         $fileName =  time().'.'. 'pdf' ;
         $pdf->save($path . '/' . $fileName);

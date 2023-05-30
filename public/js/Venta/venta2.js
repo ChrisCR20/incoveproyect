@@ -50,6 +50,7 @@ function guardarcl(e) {
                             $('#id_cliente').val(e.id_cliente);
                             $('#cliente_form')[0].reset();
                             $('#modalnuevacategoria').modal('hide');  
+                            $('#busqueda').val("");
                         }
                 });
             }
@@ -157,16 +158,20 @@ function guardar(e) {
 var contacade=0;// contador para las filas de la tabla
 var items2=[]; // arreglo de id's y productos que se van agregando a la tabla
 
-function agregarest()
+function agregarest(idpr,npr)
 {
     var sumsubtotales=0; // variable para le subtotal general
     var edx=0; //variable que suma los subtotales por cada producto
     var cantid2=0;
 
 
-    nminstituto=$("#cantidad").val();
-    tipgradoval=$("#id_producto").val();
-    tipgradotxt=$("#id_producto option:selected").text();
+    nminstituto=1;
+    console.log(idpr);
+    tipgradoval=idpr;
+    //tipgradoval=$("#id_producto").val();
+
+    tipgradotxt=npr;
+    //tipgradotxt=$("#id_producto option:selected").text();
     nit= $('#identificacion').val();
 
 
