@@ -106,8 +106,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('sucursal/edicion', 'App\Http\Controllers\sucursalController@edit');
 
     Route::get('cajaapertura', 'App\Http\Controllers\cajaController@apertura');
-    Route::get('cajacierre', 'App\Http\Controllers\cajaController@cierre');
     Route::post('caja/ingreso', 'App\Http\Controllers\cajaController@store');
+    Route::get('cajacierre', 'App\Http\Controllers\cajaController@cierre');
+    Route::post('caja/cierrecaja', 'App\Http\Controllers\cajaController@cierrecaja');
+
+    
 
     Route::get('indexcliente', 'App\Http\Controllers\clientesController@index');
     Route::get('cliente/obtener/{id}', 'App\Http\Controllers\clientesController@mostrarcliente'); 

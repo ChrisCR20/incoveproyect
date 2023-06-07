@@ -48,6 +48,7 @@
                   <input type="text" class="form-control" id="nombreempleado" name="nombreempleado" value="{{$empleadologueado[0]->nombre}}" readonly required>
                   <input type="hidden" class="form-control" id="idempleado" name="idempleado" value="{{$empleadologueado[0]->id_empleado}}"  readonly required>
                   <input type="hidden" class="form-control" id="estado" name="estado" value="{{$estado[0]}}"  readonly required>
+                  <input type="hidden" class="form-control" id="id_sucursal" name="id_sucursal" value="{{$sucursalemp[0]->id_sucursal}}"  readonly required>
                   
                 </div>
               </div>
