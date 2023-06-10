@@ -85,7 +85,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     //Ventas
-    Route::post('venta/ingreso', 'App\Http\Controllers\ventaController@store')->name('venta.ingreso');
+    //Route::post('ventacrear/ingreso', 'App\Http\Controllers\ventaController@store')->name('venta.ingreso');
+    Route::post('ventacrear/ingreso', 'App\Http\Controllers\ventaController@store');
     Route::get('ventacrear', 'App\Http\Controllers\ventaController@create');
     Route::get('venta/obtener/nit/{nit}', 'App\Http\Controllers\ventaController@getnit');
     Route::get('venta/obtener/p_unitario/{id}', 'App\Http\Controllers\ventaController@getunitario'); // obtener precio unitario de producto

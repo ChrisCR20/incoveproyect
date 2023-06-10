@@ -93,6 +93,19 @@ class ventaController extends Controller
      */
     public function store(Request $request)
     {
+        $id= auth()->user()->identificacion;
+
+        $sucursalemp= DB::table('empleado as e')
+        ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+        ->select('se.id_sucursal')
+        ->where('e.codunicoid','=',$id)
+        ->get();
+
+        $caja=DB::table('caja')
+        ->select('caja.montoinicial','caja.id_caja')
+        ->where('caja.id_sucursal','=',$sucursalemp[0]->id_sucursal)
+        ->where('caja.estado','=','1')
+        ->get();
   
         $miArrayPA = $request->nmtitulo;
         //dd($request->input('fechafactv'));
@@ -101,7 +114,7 @@ class ventaController extends Controller
         $facturaC->id_tipopago = $request->input('id_tipopago');
         $facturaC->id_sucursal = $request->input('id_sucursal');
         $facturaC->fecha = $request->input('fechafactv');
-        $facturaC->id_caja = 3;
+        $facturaC->id_caja = $caja[0]->id_caja;
         $facturaC->save();
 
         $cont =0;

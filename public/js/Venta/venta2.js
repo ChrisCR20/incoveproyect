@@ -116,7 +116,7 @@ function guardar(e) {
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                     },
-                                    url:"ingreso",
+                                    url:"ventacrear/ingreso",
                                     type:"POST",
                                     data: formData,
                                     contentType:false,
