@@ -228,25 +228,25 @@ $(document).ready(function(){
   if (data2.mes == 5){
     return "Mayo";
   }
-  if (data2.mes == 12){
+  if (data2.mes == 6){
     return "Junio";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 7){
     return "Julio";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 8){
     return "Agosto";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 9){
     return "Septiembre";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 10){
     return "Octubre";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 11){
     return "Noviembre";
   }
-  if (data2.mes == 4){
+  if (data2.mes == 12){
     return "Diciembre";
   }
    

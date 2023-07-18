@@ -140,18 +140,18 @@ class compraController extends Controller
     public function edit(Request $request,$id)
     {
         //
-        
-        $tipopago=DB::table('tipo_pago')->select('id_tipopago','nombretipo')
-        ->orderby('id_tipopago','desc')
+
+        $tipopago = DB::table('tipo_pago')->select('id_tipopago', 'nombretipo')
+        ->orderby('id_tipopago', 'desc')
         ->get();
 
-        $proveedor=DB::table('proveedor')->select('id_proveedor','nombreproveedor')
-        ->orderby('id_proveedor','desc')
+        $proveedor = DB::table('proveedor')->select('id_proveedor', 'nombreproveedor')
+        ->orderby('id_proveedor', 'desc')
         ->get();
 
         $data = DB::table('encabezado_facturac as ef')
-        ->select('ef.id_encabezadofacturac','ef.serie','ef.numerodoctoc','ef.id_tipopago','ef.id_proveedor','ef.totalcompra')
-        ->where('ef.id_encabezadofacturaC','=',$id)
+        ->select('ef.id_encabezadofacturac', 'ef.serie', 'ef.numerodoctoc', 'ef.id_tipopago', 'ef.id_proveedor', 'ef.totalcompra')
+        ->where('ef.id_encabezadofacturaC', '=', $id)
         ->get();
 
         
@@ -164,7 +164,7 @@ class compraController extends Controller
             $data1 = DB::table('encabezado_facturac as ef')
             ->join('detalle_facturac as df','ef.id_encabezadofacturac','=','df.id_encabezadofacturac')
             ->join('producto as pr','df.id_producto','=','pr.id_producto')
-            ->select('df.id_detallefacturac','df.cantidad','pr.nombreproducto','df.subtotal')
+            ->select('df.id_detallefacturac','df.cantidad','pr.nombreproducto','df.subtotal','ef.id_tipopago','ef.id_proveedor')
             ->where('ef.id_encabezadofacturaC','=',$id)
             ->get();
             
@@ -177,7 +177,7 @@ class compraController extends Controller
             foreach($data1 as $data1 => $valor){
                 $etapas1[] = (array)$valor;
             }}
-           //dd($etapas[0]['idsedecentral']);
+
 
              return datatables()->of($etapas1)->addColumn('action',function ($row){
                  $btn = '<a class="btn  btn-md" style="color:#C8A60A" title="Editar" onClick="editarc('.$row['id_detallefacturac'].');" class="edit btn btn-warning btn-sm"><div><i class="fa fa-edit"></i></div></a>';
@@ -201,11 +201,11 @@ class compraController extends Controller
     public function mostraritem($id)
     {
         $item = DB::table('detalle_facturac as df')
-        ->join('producto as pr','df.id_producto','=','pr.id_producto')
-        ->select('pr.nombreproducto','df.cantidad','df.subtotal','df.id_producto','df.id_detallefacturac','df.id_encabezadofacturaC')
-        ->where('id_detallefacturac','=',$id)
+        ->join('producto as pr', 'df.id_producto', '=', 'pr.id_producto')
+        ->select('pr.nombreproducto', 'df.cantidad', 'df.subtotal', 'df.id_producto', 'df.id_detallefacturac', 'df.id_encabezadofacturaC')
+        ->where('id_detallefacturac', '=', $id)
         ->get();
-        
+
         return response()->json($item);
     }
     /**
@@ -265,7 +265,17 @@ class compraController extends Controller
     
         //dd('chile');
     }
-
+    public function actualizarencabe(Request $request)
+    {
+        $encabezadofacturaC = encabezado_facturaC::findOrFail($request->encabezado);
+        $encabezadofacturaC->id_proveedor = $request->proveedor;
+        $encabezadofacturaC->totalcompra =$request->total;
+        $encabezadofacturaC->id_tipopago =$request->tippago;
+        $encabezadofacturaC->serie =$request->serie;
+        $encabezadofacturaC->numerodoctoc =$request->numero;
+        $encabezadofacturaC->fecha =$request->fecha;
+        $encabezadofacturaC->save();
+    }
     /**
      * Remove the specified resource from storage.
      *

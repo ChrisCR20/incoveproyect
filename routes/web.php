@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('editcompras/{idcompra}', 'App\Http\Controllers\compraController@edit');
     Route::get('editcompras/compra/obteneritem/{id}', 'App\Http\Controllers\compraController@mostraritem'); 
     Route::post('editcompras/edicion', 'App\Http\Controllers\compraController@actu');
+    Route::post('editcompras/edicioncabezac', 'App\Http\Controllers\compraController@actualizarencabe');
     Route::post('compra/ingreso', 'App\Http\Controllers\compraController@store');
    
 
@@ -137,6 +138,7 @@ Route::get('/home/obtenerventa', 'App\Http\Controllers\HomeController@revenueper
 
 //rutas users
 Route::get('users/delete/{id}', 'App\Http\Controllers\UserController@destroy');
+Route::get('users/obtener/dpi/{dpi}', 'App\Http\Controllers\UserController@buscarempleado');
 //rutas roles
 Route::get('roles/delete/{id}', 'App\Http\Controllers\RoleController@destroy');
 

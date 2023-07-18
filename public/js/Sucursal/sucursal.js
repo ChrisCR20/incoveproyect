@@ -12,6 +12,10 @@ function init(){
 
  
   $(document).ready(function(){
+
+    // $('#id_empresa').select2();
+    // $('#id_empresac').select2();
+
     $('#tablasucursal').DataTable({
         "responsive": false,
         "autoWidth": false,
@@ -116,7 +120,14 @@ function init(){
             $('#nombre_sucursaledit').val(data[0].nombresucursal);
             $('#direccionedit').val(data[0].direccionsucursal);
             $('#id_sucursal').val(data[0].id_sucursal);
+            // $("#id_empresa").val('1').trigger('change');
             // $('#sede_id').val(data[0].id_sede);
+            if ($('#id_empresa').find("option[value='" + data[0].id_empresa + "']").length)
+            { console.log('chile');$('#id_empresa').select2().val(data[0].id_empresa).trigger('change'); }
+
+
+  
+
     
            // console.log(data);
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
 use App\Models\Caja;
 use Illuminate\Http\Request;
 use DB;

@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('plugins.Datatables', true)
+@section('plugins.Select2', true)
 @section('content')
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 <div class="container">

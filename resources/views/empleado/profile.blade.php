@@ -33,11 +33,12 @@
 
                 <h3 class="profile-username text-center">{{ $data[0]->primer_nombre }}</h3>
 
-                <p class="text-muted text-center">{{ $data[0]->tel_corporativo}}</p>
+                {{-- <p class="text-muted text-center">{{ $data[0]->tel_corporativo}}</p> --}}
+                 
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Total Vendido</b> <a class="float-right">1,322</a>
+                    <b>Sucursal</b> <a class="float-right">{{ $data[0]->nombresucursal}}</a>
                   </li>
                 </ul>
               </div>
@@ -54,7 +55,7 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Datos Generales</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Ventas</a></li>
+             
 
                 </ul>
               </div><!-- /.card-header -->

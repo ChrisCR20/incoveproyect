@@ -30,7 +30,13 @@ class ventaController extends Controller
     public function card1($id)
     {
         //dd($id);
-        $producto=DB::table('producto')->select('id_producto','nombreproducto')
+        $producto=DB::table('producto')->select('id_producto','nombreproducto','cantidad','nombrecategoria','nombremedida','nombremarca')
+        ->join('categoría','categoría.id_categoria','=','producto.id_categoria')
+        ->join('marca','marca.id_marca','=','producto.id_marca')
+        ->join('medida','medida.id_medida','=','producto.id_medida')
+        ->join('sucursal as su','su.id_sucursal','=','producto.id_sucursal')
+        ->join('sucursal_empleado as se','se.id_sucursal','=','su.id_sucursal')
+        ->where('se.id_persona','=',Auth::user()->id_empleado)
         ->where('nombreproducto','LIKE','%'.$id.'%')
         ->orderby('id_producto','desc')
         ->get();

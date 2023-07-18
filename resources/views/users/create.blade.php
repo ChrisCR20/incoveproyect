@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('content')
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
         @if (count($errors) > 0)
         <div class="alert alert-danger">
             <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
@@ -39,10 +40,16 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <strong>Identificación</strong>
+                                    {!! Form::number('identificacion', null, array('id'=>'identificacion','placeholder' => 'DPI','class' => 'form-control','onblur'=>'buscarempleado()')) !!}
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <strong>Nombre</strong>
-                                    {!! Form::text('name', null, array('placeholder' => 'Nombre','class' => 'form-control')) !!}
+                                    {!! Form::text('name', null, array('id'=>'name','placeholder' => 'Nombre','class' => 'form-control','readonly')) !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -79,4 +86,44 @@
             </div>
         </div>
 
+@endsection
+@section('js')
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+    
+        function buscarempleado(){
+
+    dpi= $('#identificacion').val();
+     
+    $.ajax({url:'/users/obtener/dpi/'+dpi}).done(function(data){
+        res=Object.entries(data).length
+        console.log(data);
+      if(res==0)
+      {toastr.warning('No se encuentra registro con el numero de DPI ingresado', 'Empleado no encontrado',{timeOut: 6000})
+      $('#name').val("");
+      $('#identificacion').val("");
+    }
+      else{    
+        
+        if(data==141414){
+            toastr.warning('El DPI que ingresó ya fue registrado anteriormente', 'DPI registrado',{timeOut: 6000})
+            $('#name').val("");
+            $('#identificacion').val("");
+        }
+        else{
+            $('#name').val(data["nombre"]);
+        }
+        
+    
+    }
+      
+
+
+    });
+    // $('#nitventa').val("");
+    // $('#nombreventa').val("");
+    // $('#id_cliente').val("");
+      
+        }
+    </script> 
 @endsection

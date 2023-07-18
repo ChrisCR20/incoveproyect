@@ -58,6 +58,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'identificacion'=>'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
@@ -151,5 +152,28 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully.');
+    }
+
+    public function buscarempleado($dpi){
+
+        $user = DB::table('users')->where('identificacion','=',$dpi)->first();
+
+        if($user)
+        {
+            $persona='141414';
+            return response()->json($persona);
+        }
+        else{
+
+            $persona = DB::table('persona')
+            ->select(DB::raw("concat(primer_nombre,' ',primer_apellido) as nombre"))
+            ->where('codunicoid', '=', $dpi)
+            ->first();
+    
+            return response()->json($persona);
+        }
+
+ 
+
     }
 }

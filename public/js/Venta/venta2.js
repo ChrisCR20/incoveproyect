@@ -36,7 +36,7 @@ function guardarcl(e) {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                        url:"crearcliente",
+                        url:"venta/crearcliente",
                         type:"POST",
                         data: formData,
                         contentType:false,

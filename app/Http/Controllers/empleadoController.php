@@ -104,7 +104,7 @@ class empleadoController extends Controller
         ->join('empleado','persona.codunicoid','=','empleado.codunicoid')
         ->where('persona.id_persona','=',$id)
         ->get();
-
+        dd($data);
         return view('empleado.profile',compact('data'));
     }
 
@@ -114,6 +114,8 @@ class empleadoController extends Controller
 
         $data = DB::table('persona')
         ->join('empleado','persona.codunicoid','=','empleado.codunicoid')
+        ->join('sucursal_empleado','empleado.id_empleado','=','sucursal_empleado.id_persona')
+        ->join('sucursal','sucursal_empleado.id_sucursal','=','sucursal.id_sucursal')
         ->where('persona.codunicoid','=',$id)
         ->get();
         
@@ -138,6 +140,7 @@ class empleadoController extends Controller
 
         $data = DB::table('persona')
         ->join('empleado','persona.codunicoid','=','empleado.codunicoid')
+        ->join('sucursal_empleado','empleado.id_empleado','=','sucursal_empleado.id_persona')
         ->where('persona.id_persona','=',$id)
         ->get();
         
@@ -161,7 +164,7 @@ class empleadoController extends Controller
         //
         $idemp =DB::table('persona')
         ->join("empleado","empleado.codunicoid","=","persona.codunicoid")
-        ->where('id_persona','=',$id)
+        ->where('id_empleado','=',$id)
         ->pluck('empleado.id_empleado');
         //dd("ver");
        //dd($idemp[0]);

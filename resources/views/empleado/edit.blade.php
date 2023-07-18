@@ -47,6 +47,7 @@
                 <label>Identificacion</label>
                 {!! Form::text('codunicoid', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
               </div>
+              <input type="hidden" class="form-control" id="id_sucursale" name="id_sucursale" value="{{$data[0]->id_sucursal}}"  readonly required>
             </div>
           <div class="col-md-6">
             <div class="form-group">
@@ -127,5 +128,8 @@ $(function () {
     //Initialize Select2 Elements   
     $('.select2').select2();
 });
+
+if ($('#id_sucursal').find("option[value='" + $('#id_sucursale').val() + "']").length)
+            {$('#id_sucursal').select2().val($('#id_sucursale').val()).trigger('change'); }
   </script>
   @endsection

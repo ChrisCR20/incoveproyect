@@ -25,7 +25,8 @@ class sucursalController extends Controller
     {
       
        // $data = Empresa::orderBy('id_empresa', 'desc');
-       $empresa=Empresa::pluck('nombre_empresa','id_empresa');
+       //$empresa=Empresa::pluck('nombre_empresa','id_empresa');
+       $empresa=DB::table('empresa')->select('id_empresa','nombre_empresa')->get();
        if($request->ajax())
        {
            $data = DB::table('sucursal')
@@ -53,8 +54,8 @@ class sucursalController extends Controller
             })->rawColumns(['action'])->make(true);
        }
        
-          //  dd($etapas);
-        return view('sucursal.index',compact('empresa'));
+            //dd($empresa);
+        return view('sucursal.index',['empresa'=>$empresa]);
       
     }
 
@@ -64,7 +65,7 @@ class sucursalController extends Controller
         $sucursal = new Sucursal;
         $sucursal->nombresucursal = $request->input('nombre_sucursal');
         $sucursal->direccionsucursal = $request->input('direccion');
-        $sucursal->id_empresa = $request->input('id_empresa');
+        $sucursal->id_empresa = $request->input('id_empresac');
         $sucursal->status = '1';
         $sucursal->save();
 
@@ -74,7 +75,7 @@ class sucursalController extends Controller
     public function mostrarsucursal($id)
     {
         $sucursal = DB::table('sucursal')
-        ->select('id_sucursal','nombresucursal','direccionsucursal')
+        ->select('id_sucursal','nombresucursal','direccionsucursal','id_empresa')
         ->where('id_sucursal','=',$id)
         ->get();
         

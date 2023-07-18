@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Categoria</label>
                 <select class="form-control select2" id="id_categoria" name="id_categoria" style="width: 100%;">
-                    {{-- <option value='0'>Seleccione una opcion</option> --}}
+                    <option value={{$data[0]->id_categoria}}>{{$data[0]->nombrecategoria}}</option>
                 </select>
               </div>
           </div>
@@ -72,6 +72,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Marca</label>
                 <select class="form-control select2" id="id_marca" name="id_marca" style="width: 100%;">
+                  <option value={{$data[0]->id_marca}}>{{$data[0]->nombremarca}}</option>
                 </select>
               </div>
             </div>
@@ -79,6 +80,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Unidad de medida</label>
                     <select class="form-control select2" id="id_medida" name="id_medida" style="width: 100%;">
+                      <option value={{$data[0]->id_medida}}>{{$data[0]->nombremedida}}</option>
                     </select>
                   </div>
             </div>
@@ -130,7 +132,13 @@
 <script src="{{ asset('js/Medida/medida_c.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
+
+ 
+
   $(document).ready(function(){
+
+   
+
       $('#id_categoria').select2({
           placeholder:'Seleccione',
           ajax:{

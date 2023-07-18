@@ -25,10 +25,12 @@
               </div>              
               <div class="form-group">
                 <label for="exampleInputPassword1">Empresa</label>
-                <select class="form-control select2" id="id_empresa" name="id_empresa" style="width: 100%;">
-                  @foreach( $empresa as $key => $value )
-                    <option selected="selected" value="{{ $key }}">{{ $value }}</option>
+                <select class="form-control select2" id="id_empresac" name="id_empresac" style="width: 100%;">
+                  @if (isset($empresa))
+                  @foreach( $empresa as $emp )
+                    <option selected="" value="{{ $emp->id_empresa}}">{{ $emp->nombre_empresa }}</option>
                   @endforeach
+                  @endif
                 </select>
               </div>
         

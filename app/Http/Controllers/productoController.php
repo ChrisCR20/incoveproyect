@@ -27,6 +27,9 @@ class productoController extends Controller
         ->join('marca as m','p.id_marca','=','m.id_marca')
         ->join('categoría as cat','p.id_categoria','=','cat.id_categoria')
         ->join('medida as med','p.id_medida','=','med.id_medida')
+        ->join('sucursal as su','su.id_sucursal','=','p.id_sucursal')
+        ->join('sucursal_empleado as se','se.id_sucursal','=','su.id_sucursal')
+        ->where('se.id_persona','=',Auth::user()->id_empleado)
         ->select('p.codigoproducto','p.nombreproducto','p.cantidad','cat.nombrecategoria','m.nombremarca','med.nombremedida','p.id_producto')
         ->get();
         // dd($data);
@@ -116,6 +119,9 @@ class productoController extends Controller
         $medida=Medida::pluck('nombremedida','id_medida');
 
         $data = DB::table('producto')
+        ->join('categoría','producto.id_categoria','=','categoría.id_categoria')
+        ->join('marca','producto.id_marca','=','marca.id_marca')
+        ->join('medida','producto.id_medida','=','medida.id_medida')
         ->where('producto.id_producto','=',$id)
         ->get();
     

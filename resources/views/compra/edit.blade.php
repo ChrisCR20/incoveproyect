@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
+@section('plugins.Sweetalert2', true)
 @section('content')
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 @include('compra/modaledit')
@@ -22,7 +23,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-   
     <div class="card">
   <div class="card-header" style="background-color: #f3bb53">
     <h3 >Factura: {{$etapas['0']['serie'].'-'.$etapas['0']['numerodoctoc']}} </h3>
@@ -50,7 +50,9 @@
                     <label class="form-label" for="sigla">Numero </label>
                     <input type="text" class="form-control" id="numerodoctoc" name="numerodoctoc" value="{{$etapas['0']['numerodoctoc']}}" required>
                   </div>
-
+                  <input type="hidden" class="form-control" id="id_tipopagos" name="id_tipopagos" value="{{$etapas['0']['id_tipopago']}}"  readonly required>
+                  <input type="hidden" class="form-control" id="id_proveedors" name="id_proveedors" value="{{$etapas['0']['id_proveedor']}}"  readonly required>
+                  <input type="hidden" class="form-control" id="idencabezado" name="idencabezado" value="{{$etapas['0']['id_encabezadofacturac']}}"  readonly required>
               </div>
               <div class="form-group row post">
                 <div class="col-lg-4">
@@ -97,6 +99,7 @@
 {{--         
     </form> --}}
   </div>
+  <div class="card-footer">  <button type="button" id="guardaredit" class="btn btn-success float-left">Guardar</button></div>
 </div>
 </div>
 </div>
@@ -109,8 +112,68 @@
     headers:{'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')}
 });
 
+document.getElementById("guardaredit")
+    .addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+       
+
+        var fecha = $('#fechafactc').val();
+       var serie = $('#serie').val();
+       var numero = $('#numerodoctoc').val();
+       var proveedor = $('#id_proveedor').val();
+       var tippago =$('#id_tipopago').val();
+       var total  =$('#total').val();
+       var encabezado  =$('#idencabezado').val();
+
+       Swal.fire({
+            title: 'Actualizar datos',
+            text: "Esta seguro de actualizar los datos de compra?",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si'
+          }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Actualizada',
+                    'El registro fue actualizado',
+                    'success'
+                  ).then((result) => {
+                    if (result.value) {
+                      $.ajax({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+       url:"edicioncabezac",
+       type:"POST",
+       data: {fecha:fecha, serie:serie,numero:numero,proveedor:proveedor,tippago:tippago,total:total,encabezado:encabezado},
+       success: function(e){
+        location.href = "../indexcompras";
+       }
+      
+     
+     });
+                    }
+                  })
+                  
+            }
+          });
+
+
+    });
+
+if ($('#id_tipopago').find("option[value='" + $('#id_tipopagos').val() + "']").length)
+            {$('#id_tipopago').select2().val($('#id_tipopagos').val()).trigger('change'); }
+
+if ($('#id_proveedor').find("option[value='" + $('#id_proveedors').val() + "']").length)
+            {$('#id_proveedor').select2().val($('#id_proveedors').val()).trigger('change'); }
+
   function editarc(id_detallefc){ 
- // alert('culo')       
+     
   var idetallefc = id_detallefc;
   $.ajax({url:'compra/obteneritem/'+idetallefc}).done(function(data){
       console.log(data);
