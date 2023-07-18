@@ -44,6 +44,7 @@
                                 <div class="form-group">
                                     <strong>Identificación</strong>
                                     {!! Form::number('identificacion', null, array('id'=>'identificacion','placeholder' => 'DPI','class' => 'form-control','onblur'=>'buscarempleado()')) !!}
+                                    {!! Form::text('id_empleado', null, array('id'=>'id_empleado','placeholder' => 'DPI','class' => 'form-control','hidden')) !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -112,6 +113,7 @@
         }
         else{
             $('#name').val(data["nombre"]);
+            $('#id_empleado').val(data["id_empleado"]);
         }
         
     

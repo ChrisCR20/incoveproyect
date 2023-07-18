@@ -166,10 +166,12 @@ class UserController extends Controller
         else{
 
             $persona = DB::table('persona')
-            ->select(DB::raw("concat(primer_nombre,' ',primer_apellido) as nombre"))
-            ->where('codunicoid', '=', $dpi)
+            ->select(DB::raw("concat(primer_nombre,' ',primer_apellido) as nombre"),'empleado.id_empleado')
+            ->join('empleado','persona.codunicoid','=','empleado.codunicoid')
+            ->where('empleado.codunicoid', '=', $dpi)
             ->first();
-    
+            
+            //dd($persona);
             return response()->json($persona);
         }
 
