@@ -43,38 +43,38 @@
         <div class="row">
           <div class="col-md-12">
               <div class="form-group">
-                <label>Identificacion</label>
+                <label>Identificación</label>
                 {!! Form::text('codunicoid', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
               </div>
             </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>Primer Nombre</label>
-              {!! Form::text('primer_nombre', null, array('placeholder' => 'primer nombre','class' => 'form-control','required')) !!}
+              {!! Form::text('primer_nombre', null, array('placeholder' => 'Primer Nombre','class' => 'form-control','required')) !!}
             </div>
           </div>
           <div class="col-md-6">
               <div class="form-group">
                 <label>Segundo Nombre</label>
-                {!! Form::text('segundo_nombre', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
+                {!! Form::text('segundo_nombre', null, array('placeholder' => 'Segundo Nombre','class' => 'form-control')) !!}
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Tercer Nombre</label>
-                {!! Form::text('tercer_nombre', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
+                {!! Form::text('tercer_nombre', null, array('placeholder' => 'Tercer Nombre','class' => 'form-control')) !!}
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Primer Apellido</label>
-                {!! Form::text('primer_apellido', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
+                {!! Form::text('primer_apellido', null, array('placeholder' => 'Primer apellido','class' => 'form-control','required')) !!}
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Segundo Apellido</label>
-                {!! Form::text('segundo_apellido', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
+                {!! Form::text('segundo_apellido', null, array('placeholder' => 'Segundo apellido','class' => 'form-control')) !!}
               </div>
             </div>
 
@@ -93,7 +93,7 @@
           <div class="col-md-6">
               <div class="form-group">
                 <label>Telefono</label>
-                {!! Form::text('tel_corporativo', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
+                {!! Form::text('tel_corporativo', null, array('placeholder' => 'Telefono','class' => 'form-control')) !!}
               </div>
             </div>
           <div class="col-md-6">
