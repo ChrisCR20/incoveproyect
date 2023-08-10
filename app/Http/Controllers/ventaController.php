@@ -159,7 +159,7 @@ class ventaController extends Controller
         ->where('tipo_pago.id_tipopago','=',$request->input('id_tipopago'))
         ->get();
         $pdf = PDF::loadView('imprimir',compact('cliente','pago','orden','detallef','encabezadof'));
-        $path = public_path('facturas/');
+        $path = public_path('facturas');
         $fileName =  time().'.'. 'pdf' ;
         $pdf->save($path . '/' . $fileName);
 
