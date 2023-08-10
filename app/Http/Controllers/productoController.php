@@ -72,6 +72,14 @@ class productoController extends Controller
     public function store(Request $request)
     {
         //
+        $sucursalemp= DB::table('empleado as e')
+        ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+        ->select('se.id_sucursal')
+        ->where('e.id_empleado','=',auth()->user()->id_empleado)
+        ->get();
+
+       
+
         $Producto = new Producto;
         $Producto->id_marca = $request->input('id_marca');
         $Producto->id_categoria = $request->input('id_categoria');
@@ -81,6 +89,7 @@ class productoController extends Controller
         $Producto->codigobarras = $request->input('codigobarras');
         $Producto->precio_costo = $request->input('precio_costo');
         $Producto->precio_venta = $request->input('precio_venta');
+        $Producto->id_sucursal = $sucursalemp[0]->id_sucursal;
         $Producto->id_usuario = Auth::user()->id;
         $Producto->save();
 
