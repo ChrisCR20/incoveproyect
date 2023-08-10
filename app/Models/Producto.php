@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace App\Models;
 
@@ -15,6 +15,8 @@ class Producto extends Model
     public $timestamps=false;
     
     protected $fillable = [
+        'cantidad',
+        'nombreproducto',
         'id_marca',
         'id_medida',
         'id_categoria',
