@@ -125,7 +125,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('indexreporte', 'App\Http\Controllers\reporteController@index');
     Route::get('rproductoindex', 'App\Http\Controllers\reporteController@indexproducto')->name('reporte.producto');
-    Route::get('rventasindex', 'App\Http\Controllers\reporteController@indexventas')->name('reporte.ventas');
+    Route::get('rventasindex/{fechai?}/{fechaf?}', 'App\Http\Controllers\reporteController@indexventas')->name('reporte.ventas');
 
 
 });

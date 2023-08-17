@@ -24,12 +24,18 @@ class reporteController extends Controller
     }
     public function indexproducto(Request $request)
     {
+            $sucursalemp= DB::table('empleado as e')
+            ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+            ->select('se.id_sucursal')
+            ->where('e.id_empleado','=',auth()->user()->id_empleado)
+            ->get();
 
             $productos = DB::table('producto')
             ->join('marca','marca.id_marca','=','producto.id_marca')
             ->join('categoría','categoría.id_categoria','=','producto.id_categoria')
             ->join('medida','medida.id_medida','=','producto.id_medida')
             ->select('producto.codigoproducto','producto.nombreproducto','producto.cantidad','marca.nombremarca','categoría.nombrecategoria','medida.nombremedida')
+            ->where('producto.id_sucursal','=',$sucursalemp[0]->id_sucursal)
             ->orderby('producto.cantidad','asc')
             ->get();
             
@@ -37,31 +43,45 @@ class reporteController extends Controller
           //  dd($productos);
 
                 $pdf = PDF::loadView('Reporte.inventario.productos',compact('productos'));
-                return $pdf->download('pdfview.pdf');
+                $path = public_path('facturas');
+                $fileName =  time().'.'. 'pdf' ;
+                $pdf->save($path . '/' . $fileName);
         
-    
-            return view('Reporte.inventario.productos',compact('productos'));
+                $pdf = public_path('facturas/'.$fileName);
+                return response()->download($pdf);
+
 
     }
 
-    public function indexventas(Request $request)
+    public function indexventas($fechai,$fechaf)
     {
+             $sucursalemp= DB::table('empleado as e')
+            ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+            ->select('se.id_sucursal')
+            ->where('e.id_empleado','=',auth()->user()->id_empleado)
+            ->get();
 
             $ventas = DB::table('encabezado_factura')
             ->join('detalle_factura','detalle_factura.id_encabezadof','=','encabezado_factura.id_encabezadof')
             ->join('cliente','cliente.id_cliente','=','encabezado_factura.id_cliente')
             ->join('producto','detalle_factura.id_producto','=','producto.id_producto')
+            ->join('caja','caja.id_caja','=','encabezado_factura.id_caja')
             ->select('encabezado_factura.id_encabezadof','cliente.nombrecliente','encabezado_factura.montototal','producto.nombreproducto',DB::raw('producto.precio_costo * detalle_factura.cantidad as costo'),
             'detalle_factura.cantidad','detalle_factura.subtotal',DB::raw('detalle_factura.subtotal-(producto.precio_costo *detalle_factura.cantidad) as ganancia'),)
+            ->where('caja.id_sucursal','=',$sucursalemp[0]->id_sucursal)
+            ->whereBetween('encabezado_factura.fecha',[$fechai,$fechaf])
             ->orderby('encabezado_factura.id_encabezadof','asc')
             ->get();
-
+       
             $totales = DB::table('encabezado_factura')
             ->join('detalle_factura','detalle_factura.id_encabezadof','=','encabezado_factura.id_encabezadof')
             ->join('cliente','cliente.id_cliente','=','encabezado_factura.id_cliente')
             ->join('producto','detalle_factura.id_producto','=','producto.id_producto')
+            ->join('caja','caja.id_caja','=','encabezado_factura.id_caja')
             ->select(DB::raw('sum(producto.precio_costo * detalle_factura.cantidad) as tcosto'),
             DB::raw('sum(detalle_factura.cantidad) as tcantidad'),DB::raw('sum(detalle_factura.subtotal) as tsubtotal'),DB::raw('sum(detalle_factura.subtotal-(producto.precio_costo *detalle_factura.cantidad)) as tganancia'),)
+            ->where('caja.id_sucursal','=',$sucursalemp[0]->id_sucursal)
+            ->whereBetween('encabezado_factura.fecha',[$fechai,$fechaf])
             ->orderby('encabezado_factura.id_encabezadof','asc')
             ->get();
 
@@ -69,10 +89,17 @@ class reporteController extends Controller
           // dd($totales);
 
                 $pdf = PDF::loadView('Reporte.inventario.ventas',compact('ventas','totales'));
-                return $pdf->download('ventas.pdf');
+
+                $path = public_path('facturas');
+        $fileName =  time().'.'. 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+
+        $pdf = public_path('facturas/'.$fileName);
+        return response()->download($pdf)->deleteFileAfterSend(true);
+                //return response()->$pdf->download('ventas.pdf');
         
     
-            return view('Reporte.inventario.ventas',compact('ventas'));
+          //  return view('Reporte.inventario.ventas',compact('ventas'));
 
     }
 

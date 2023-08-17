@@ -75,6 +75,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
                 {{-- {{ $data->render() }} --}}
             </div>
         </div>
@@ -85,7 +86,7 @@
 <script>
     $(function () {
 
-   var t=   $("#tablausuarios").DataTable({
+        var t=   $("#tablausuarios").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
         "language": {

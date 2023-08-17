@@ -564,6 +564,26 @@ return [
                 ],
             ],
         ],
+        'DateRange'=>[
+            'active'=>true,
+            'files'=>[
+                [
+                    'type'=>'js',
+                    'asset'=>true,
+                    'location'=>'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js',
+                ],
+                [
+                    'type'=>'js',
+                    'asset'=>true,
+                    'location'=>'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
+                ],
+                [
+                    'type'=>'css',
+                    'asset'=> true,
+                    'location'=> 'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css'
+                ]
+            ]
+        ]
     ],
 
     /*

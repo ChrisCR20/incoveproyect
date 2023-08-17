@@ -47,7 +47,7 @@
                 <label>Identificacion</label>
                 {!! Form::text('codunicoid', null, array('placeholder' => 'Identificacion','class' => 'form-control','required')) !!}
               </div>
-              <input type="hidden" class="form-control" id="id_sucursale" name="id_sucursale" value="{{$data[0]->id_sucursal}}"  readonly required>
+              <input type="hidden" class="form-control" id="id_sucursale" name="id_sucursale" value="{{$data[0]->id_sucursal}}" >
             </div>
           <div class="col-md-6">
             <div class="form-group">
