@@ -41,7 +41,7 @@ class BodegaController extends Controller
              })->rawColumns(['action'])->make(true);
         }
 
-        return view('Bodega.index');
+        return view('bodega.index');
     }
 
     public function create()
@@ -50,7 +50,7 @@ class BodegaController extends Controller
         ->orderby('id_cliente','desc')
         ->get();
     
-        return view('Bodega.create',compact('Cliente'));
+        return view('bodega.create',compact('Cliente'));
     }
 
     /**
