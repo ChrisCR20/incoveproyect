@@ -25,6 +25,18 @@ $(document).on("click","#btnrepproddown",function(){
     reporteproducto();
         
     });
+
+    $(document).on("click","#btnrepbajaexis",function(){
+  
+        reportebajaexistencia();
+            
+        });
+
+$(document).on("click","#btnrepmasvendidos",function(){
+  
+reportemasvendidos();
+                
+});
     
 
 function reporteproducto(){
@@ -46,6 +58,62 @@ function reporteproducto(){
                                         var link = document.createElement('a');
                                         link.href = window.URL.createObjectURL(blob);
                                         link.download = "Productos.pdf";
+                                        link.click();
+                                        swal.close();
+                            
+        // $('#sede_id').val(data[0].id_sede);
+
+       // console.log(data);
+    });
+}
+
+function reportebajaexistencia(){
+    Swal.fire({
+        title: 'Espere un momento !',
+        type: 'info',
+        html: 'El reporte se esta generando',// add html attribute if you want or remove
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+
+    $.ajax({url:'rbajaexistencia',         xhrFields: {
+        responseType: 'blob'
+    }}).done(function(e){
+
+        var blob = new Blob([e]);
+                                        var link = document.createElement('a');
+                                        link.href = window.URL.createObjectURL(blob);
+                                        link.download = "ProductosBajaExistencia.pdf";
+                                        link.click();
+                                        swal.close();
+                            
+        // $('#sede_id').val(data[0].id_sede);
+
+       // console.log(data);
+    });
+}
+
+function reportemasvendidos(){
+    Swal.fire({
+        title: 'Espere un momento !',
+        type: 'info',
+        html: 'El reporte se esta generando',// add html attribute if you want or remove
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+
+    $.ajax({url:'masvendidos',         xhrFields: {
+        responseType: 'blob'
+    }}).done(function(e){
+
+        var blob = new Blob([e]);
+                                        var link = document.createElement('a');
+                                        link.href = window.URL.createObjectURL(blob);
+                                        link.download = "Top15masVendidos.pdf";
                                         link.click();
                                         swal.close();
                             

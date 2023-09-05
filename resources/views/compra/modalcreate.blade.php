@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalnuevacompra"  role="dialog" aria-labelledby="modalnuevacompra" aria-hidden="true">
-    <div class="modal-dialog modal-xl" >
+    <div class="modal-dialog modal-lg" >
       <div class="modal-content">
         <div class="modal-header" style="background-color:  #5F9EA0 ">
           <h4 style="color: white">Registrar Compra</h4>

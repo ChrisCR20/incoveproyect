@@ -2,24 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use DB;;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\detalle_factura;
 use App\Models\encabezado_factura;
 use PDF;
+use PhpParser\Node\Expr\FuncCall;
 
-use DB;
-class ventaController extends Controller
+class BodegaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //
+
+    public function index(Request $request){
+
+        if($request->ajax())
+        {      
+            $data = DB::table('encabezado_factura')->select('encabezado_factura.id_encabezadof as id_encabezadof','cliente.nombrecliente as nombrecliente','encabezado_factura.fecha as fecha')
+            ->join('cliente','cliente.id_cliente','=','encabezado_factura.id_cliente')
+            ->get();
+            //   $datos = json_decode($data,true);
+            //dd($data);
+            //dd(Arr::get($data,'idsedecentral'));
+            if(count($data) ==0){
+                $etapas=[];
+            }else{
+            foreach($data as $data => $valor){
+                $etapas[] = (array)$valor;
+            }}
+           //dd($etapas[0]['idsedecentral']);
+
+             return datatables()->of($etapas)->addColumn('action',function ($row){
+                 $btn = '<a class="btn  btn-md" style="color:#123D6C" title="Editar"  href="verentrega/'.$row['id_encabezadof'].'" ><div><i class="fa fa-eye"></i></div></a>';
+
+               // $btn = '<button type="button" onClick="editar('.$row['id_sede'].');" class="edit btn btn-warning btn-sm"><div><i class="fa fa-edit"></i></div></button>';
+                return $btn;
+             
+             })->rawColumns(['action'])->make(true);
+        }
+
+        return view('Bodega.index');
+    }
+
+    public function create()
     {
-        //
+        $Cliente=DB::table('cliente')->select('id_cliente','nombrecliente')
+        ->orderby('id_cliente','desc')
+        ->get();
+    
+        return view('Bodega.create',compact('Cliente'));
     }
 
     /**
@@ -53,18 +84,6 @@ class ventaController extends Controller
 
       //  dd($producto);
        
-    }
-    public function create()
-    {
-        //
-        $tipopago = DB::table('tipo_pago')
-        ->select('id_tipopago','nombretipo')
-        ->get();
-
-        $producto=DB::table('producto')->select('id_producto','nombreproducto')
-        ->orderby('id_producto','desc')
-        ->get();
-        return view('venta.pos',['tipopago'=>$tipopago,'producto'=>$producto]);
     }
 
     public function getnit($nit)
@@ -189,11 +208,61 @@ class ventaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         //
-    }
 
+        $cliente = DB::table('cliente')->select('id_cliente', 'nombrecliente')
+        ->orderby('id_cliente', 'desc')
+        ->get();
+
+        $data = DB::table('encabezado_factura as ef')
+        ->join('cliente','cliente.id_cliente','=','ef.id_cliente')
+        ->select('ef.id_encabezadof', 'cliente.nombrecliente','ef.fecha')
+        ->where('ef.id_encabezadof', '=', $id)
+        ->get();
+
+        
+
+
+        if($request->ajax())
+        {
+            
+
+            $data1 = DB::table('encabezado_factura as ef')
+            ->join('detalle_factura as df','ef.id_encabezadof','=','df.id_encabezadof')
+            ->join('producto as pr','df.id_producto','=','pr.id_producto')
+            ->select('df.id_detallef','df.cantidad','pr.nombreproducto')
+            ->where('ef.id_encabezadof','=',$id)
+            ->get();
+            
+         //   $datos = json_decode($data,true);
+            //dd($data);
+            //dd(Arr::get($data,'idsedecentral'));
+            if(count($data1) ==0){
+                $etapas1=[];
+            }else{
+            foreach($data1 as $data1 => $valor){
+                $etapas1[] = (array)$valor;
+            }}
+
+
+             return datatables()->of($etapas1)->addColumn('action',function ($row){
+   
+             
+             })->rawColumns(['action'])->make(true);
+        }
+
+        if(count($data) ==0){
+            $etapas=[];
+        }else{
+        foreach($data as $data => $valor){
+            $etapas[] = (array)$valor;
+        }}
+
+        //dd($etapas);
+        return view('bodega.detalle',['cliente'=>$cliente,'etapas'=>$etapas]);
+    }
     /**
      * Update the specified resource in storage.
      *

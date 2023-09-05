@@ -22,6 +22,63 @@ class reporteController extends Controller
         return View('Reporte.index');
 
     }
+    public function bajaexistencia(Request $request){
+        $sucursalemp= DB::table('empleado as e')
+        ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+        ->select('se.id_sucursal')
+        ->where('e.id_empleado','=',auth()->user()->id_empleado)
+        ->get();
+
+        $productos = DB::table('producto')
+        ->join('marca','marca.id_marca','=','producto.id_marca')
+        ->join('categoría','categoría.id_categoria','=','producto.id_categoria')
+        ->join('medida','medida.id_medida','=','producto.id_medida')
+        ->select('producto.codigoproducto','producto.nombreproducto','producto.cantidad','marca.nombremarca','categoría.nombrecategoria','medida.nombremedida')
+        ->where('producto.id_sucursal','=',$sucursalemp[0]->id_sucursal)
+        ->whereIn('producto.cantidad',['0','1','2'])
+        ->orderby('producto.cantidad','asc')
+        ->get();
+        
+
+        //dd($productos);
+
+            $pdf = PDF::loadView('Reporte.inventario.bajaexistencia',compact('productos'));
+            $path = public_path('facturas');
+            $fileName =  time().'.'. 'pdf' ;
+            $pdf->save($path . '/' . $fileName);
+    
+            $pdf = public_path('facturas/'.$fileName);
+            return response()->download($pdf)->deleteFileAfterSend(true);
+    }
+    public function masvendido(Request $request){
+
+        $sucursalemp= DB::table('empleado as e')
+        ->join('sucursal_empleado as se','se.id_persona','=','e.id_empleado')
+        ->select('se.id_sucursal')
+        ->where('e.id_empleado','=',auth()->user()->id_empleado)
+        ->get();
+
+
+        $ventas = DB::table('encabezado_factura')
+        ->join('detalle_factura','detalle_factura.id_encabezadof','=','encabezado_factura.id_encabezadof')
+        ->join('producto','detalle_factura.id_producto','=','producto.id_producto')
+        ->join('caja','caja.id_caja','=','encabezado_factura.id_caja')
+        ->select('producto.codigoproducto','producto.nombreproducto',DB::raw('count(detalle_factura.cantidad) as cantidad'))
+        ->where('caja.id_sucursal','=',$sucursalemp[0]->id_sucursal)
+        ->groupBy('producto.nombreproducto')
+        ->orderBy('cantidad','desc')
+        ->limit(15)
+        ->get();
+
+        
+        $pdf = PDF::loadView('Reporte.inventario.masvendido',compact('ventas'));
+        $path = public_path('facturas');
+        $fileName =  time().'.'. 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+
+        $pdf = public_path('facturas/'.$fileName);
+        return response()->download($pdf)->deleteFileAfterSend(true);
+    }
     public function indexproducto(Request $request)
     {
             $sucursalemp= DB::table('empleado as e')

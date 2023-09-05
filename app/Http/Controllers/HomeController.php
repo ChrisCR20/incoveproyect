@@ -52,6 +52,7 @@ class HomeController extends Controller
         ->select('pr.nombreproducto',DB::raw('count(df.cantidad) as cantidad'))
         ->groupBy('pr.nombreproducto')
         ->orderBy('cantidad','desc')
+        ->limit(7)
         ->get();
 
                     //dd(Arr::get($data,'idsedecentral'));

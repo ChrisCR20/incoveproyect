@@ -397,6 +397,18 @@ return [
             'can'  => 'Ventas',
         ],
         [
+            'text' => 'Egreso de bodega',
+            'url'  => 'egresobodega',
+            'icon' => 'fa fa-check-square',
+            'can'  => 'EgresoBodega',
+        ],
+        [
+            'text' => 'Listado de egresos de bodega',
+            'url'  => 'indexbodega',
+            'icon' => 'fa fa-check-square',
+            'can'  => 'ListadoBodega',
+        ],
+        [
             'text' => 'Clientes',
             'url'  => 'clientes',
             'icon' => 'fas fa-fw fa-users',

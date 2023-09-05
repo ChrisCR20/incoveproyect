@@ -53,6 +53,31 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-6">
+                  <!-- small card -->
+                  <div class="small-box bg-info">
+                    <div class="inner">
+                      <h3></br></h3>
+      
+                      <p>Productos con baja existencia</p>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <a id="btnrepbajaexis" class="btn small-box-footer">
+                      Generar reporte <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                    {{-- <span class="small-box-footer" >
+                      <a class="btn small-box-footer"  id="btnrepventas">Generar <i  class="fas fa-arrow-circle-right"></i></a>
+                    </span> --}}
+                      {{-- <span >
+                        <a id="btnrepventas" >
+                      <div>Ver <i class="fas fa-arrow-circle-right"></i></div>
+                    </a>
+                      </span> --}}
+                 
+                  </div>
+              </div>
+                <div class="col-lg-4 col-6">
                     <!-- small card -->
                     <div class="small-box" style="background-color: #4682B4">
                       <div class="inner">
@@ -74,13 +99,13 @@
                       <div class="inner">
                         <h3></br></h3>
         
-                        <p>Reporte de Compras</p>
+                        <p>Los 15 mas vendidos</p>
                       </div>
                       <div class="icon">
                         <i class="fa fa-credit-card"></i>
                       </div>
-                      <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
+                      <a id="btnrepmasvendidos"  class="small-box-footer">
+                        Generar reporte <i class="fas fa-arrow-circle-right"></i>
                       </a>
                     </div>
                   </div>

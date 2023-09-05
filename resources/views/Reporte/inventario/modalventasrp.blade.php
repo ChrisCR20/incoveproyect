@@ -2,7 +2,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #4682B4">
-          <h4>Seleccionar Fechas</h4>
+          <h4 style="color: white">Seleccionar Fechas</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

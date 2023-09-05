@@ -126,7 +126,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('indexreporte', 'App\Http\Controllers\reporteController@index');
     Route::get('rproductoindex', 'App\Http\Controllers\reporteController@indexproducto')->name('reporte.producto');
     Route::get('rventasindex/{fechai?}/{fechaf?}', 'App\Http\Controllers\reporteController@indexventas')->name('reporte.ventas');
+    Route::get('rbajaexistencia', 'App\Http\Controllers\reporteController@bajaexistencia')->name('reporte.bajaexistencia');
+    Route::get('masvendidos', 'App\Http\Controllers\reporteController@masvendido')->name('reporte.masvendidos');
 
+    //rutas bodega
+    Route::get('indexbodega', 'App\Http\Controllers\BodegaController@index')->name('indexbodega');;
+    Route::post('egresobodega/ingreso', 'App\Http\Controllers\BodegaController@store');
+    Route::get('egresobodega', 'App\Http\Controllers\BodegaController@create');
+    Route::get('bodega/obtener/p_unitario/{id}', 'App\Http\Controllers\BodegaController@getunitario'); // obtener precio unitario de producto
+    Route::get('bodega/card/{dato}', 'App\Http\Controllers\BodegaController@card1');
+    Route::get('verentrega/{idegreso}', 'App\Http\Controllers\BodegaController@edit');
+    
 
 });
 
